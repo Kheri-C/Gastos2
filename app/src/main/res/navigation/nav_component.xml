@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_component"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/listaGastosFragment"
+        android:name="edu.itesm.gastos.fragment.ListaGastosFragment"
+        android:label="ListaGastosFragment" >
+        <action
+            android:id="@+id/action_listaGastosFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="edu.itesm.gastos.fragment.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registraUsuarioFragment"
+        android:name="edu.itesm.gastos.fragment.RegistraUsuarioFragment"
+        android:label="fragment_registra_usuario"
+        tools:layout="@layout/fragment_registra_usuario" >
+        <action
+            android:id="@+id/action_registraUsuarioFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="edu.itesm.gastos.fragment.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_listaGastosFragment"
+            app:destination="@id/listaGastosFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registraUsuarioFragment"
+            app:destination="@id/registraUsuarioFragment" />
+    </fragment>
+</navigation>

@@ -1,20 +1,38 @@
-package edu.itesm.gastos
+package edu.itesm.gastos.fragment
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.navigation.fragment.findNavController
+import edu.itesm.gastos.R
 import edu.itesm.gastos.activities.MainActivity
 
-class SplashActivity : AppCompatActivity() {
-    private  lateinit var motionLayout : MotionLayout
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
-        this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+class SplashFragment : Fragment() {
+    // TODO: Rename and change types of parameters
 
-        motionLayout = findViewById(R.id.splash_main)
+    private  lateinit var motionLayout : MotionLayout
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_splash, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        activity?.window?.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
+        motionLayout = view.findViewById(R.id.splash_main)
         motionLayout.startLayoutAnimation()
         motionLayout.setTransitionListener(object : MotionLayout.TransitionListener{
             override fun onTransitionStarted(
@@ -35,8 +53,9 @@ class SplashActivity : AppCompatActivity() {
             }
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-                finish()
+                Handler(Looper.myLooper()!!).postDelayed({
+
+                }, 3000)
             }
 
             override fun onTransitionTrigger(
@@ -49,6 +68,5 @@ class SplashActivity : AppCompatActivity() {
             }
 
         })
-
     }
 }
