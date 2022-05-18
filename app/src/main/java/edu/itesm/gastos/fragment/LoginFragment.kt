@@ -12,6 +12,7 @@ import edu.itesm.gastos.R
 import edu.itesm.gastos.databinding.FragmentListaGastosBinding
 import edu.itesm.gastos.databinding.FragmentLoginBinding
 import edu.itesm.gastos.utils.FirebaseUtils.firebaseAuth
+import edu.itesm.gastos.utils.FirebaseUtils.firebaseUser
 
 
 /**
@@ -43,7 +44,13 @@ class LoginFragment : Fragment() {
             val password = binding.etSignInPassword.text.toString().trim()
 
             if (!(email.isNullOrEmpty() && password.isNullOrEmpty())) {
-
+                firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { respuesta ->
+                    if(respuesta.isSuccessful){
+                        findNavController().navigate(R.id.action_loginFragment_to_listaGastosFragment)
+                    }else{
+                        Toast.makeText(activity, "Error de login", Toast.LENGTH_LONG).show()
+                    }
+                }
             }else{
                 Toast.makeText(activity, "email or password incorrect", Toast.LENGTH_LONG).show()
             }
@@ -57,7 +64,9 @@ class LoginFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
+        firebaseUser?.let{
+            findNavController().navigate(R.id.action_loginFragment_to_listaGastosFragment)
+        }
     }
 
 

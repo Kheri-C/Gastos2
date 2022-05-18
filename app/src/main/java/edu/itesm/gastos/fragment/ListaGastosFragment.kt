@@ -23,6 +23,7 @@ import edu.itesm.gastos.databinding.FragmentListaGastosBinding
 import edu.itesm.gastos.entities.Gasto
 import edu.itesm.gastos.entities.GastoFb
 import edu.itesm.gastos.utils.FirebaseUtils.firebaseAuth
+import edu.itesm.gastos.utils.FirebaseUtils.firebaseUser
 import edu.itesm.perros.adapter.GastosAdapter
 
 
@@ -72,7 +73,8 @@ class ListaGastosFragment : Fragment() {
 
     private fun removeGasto(position: Int){
         val gasto = adapter.getGasto(position)
-        databaseReference
+        val userReference = databaseReference.child(firebaseUser!!.uid.toString())
+        userReference
             .child(gasto.id.toString()).removeValue().addOnSuccessListener {
                 Toast.makeText(activity,
                     "Borrado de la BD", Toast.LENGTH_LONG).show()
@@ -84,7 +86,8 @@ class ListaGastosFragment : Fragment() {
 
     }
     private fun initViewModel(){
-        databaseReference.addValueEventListener(object : ValueEventListener {
+        val userReference = databaseReference.child(firebaseUser!!.uid.toString())
+        userReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 var lista = mutableListOf<Gasto>()
                 for (gastoObject in snapshot.children){
@@ -117,10 +120,10 @@ class ListaGastosFragment : Fragment() {
 
             activity?.let { it1 ->
                 GastoCapturaDialog(onSubmitClickListener = { gasto->
-
-                    val id = databaseReference.push().key!!
+                    val userReference = databaseReference.child(firebaseUser!!.uid.toString())
+                    val id = userReference.push().key!!
                     val gastoFb = GastoFb(id,gasto.description, gasto.monto)
-                    databaseReference.child(id).setValue(gastoFb)
+                    userReference.child(id).setValue(gastoFb)
                         .addOnSuccessListener {
                             Toast.makeText(activity, "Agregado", Toast.LENGTH_LONG).show()
                         }.addOnFailureListener {
@@ -134,7 +137,8 @@ class ListaGastosFragment : Fragment() {
 
     private fun logOut(){
         binding.logout.setOnClickListener {
-
+            firebaseAuth.signOut()
+            findNavController().navigate(R.id.action_listaGastosFragment_to_loginFragment)
         }
     }
 

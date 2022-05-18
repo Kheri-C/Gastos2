@@ -54,7 +54,7 @@ class SplashFragment : Fragment() {
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 Handler(Looper.myLooper()!!).postDelayed({
-
+                    findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
                 }, 3000)
             }
 

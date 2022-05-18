@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "78333340465",
+    "project_id": "gastosfirebase-40783",
+    "storage_bucket": "gastosfirebase-40783.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78333340465:android:37c17ea27127ba9c821e10",
+        "android_client_info": {
+          "package_name": "edu.itesm.gastos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "78333340465-lf9hi3qnhvhmfnor89lsoeufq0l9h5g9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuscZc000Bt2x-MdorWxW1KvicycYgDSA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "78333340465-lf9hi3qnhvhmfnor89lsoeufq0l9h5g9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
